@@ -15,5 +15,19 @@
         <input type="password" name="password" title="password" placeholder="password"><br>
         <input type="submit" value="login">
     </form>
-    <h1></h1>
+    <h1>file upload</h1>
+    <form action="{{ url_for('file_upload') }}" method="post" enctype="multipart/form-data">
+        <input type="file" value="choose file" title="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel, text/plain">
+        <input type="submit" value="upload">
+    </form>
+    <h1>convert to csv</h1>
+    <form action="{{ url_for('convert_csv') }}" method="post" enctype="multipart/form-data">
+        <input type="file" value="choose file" title="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        <input type="submit" value="upload">
+    </form>
+    <h1>convert to csv two</h1>
+    <form action="{{ url_for('convert_csv_two') }}" method="post" enctype="multipart/form-data">
+        <input type="file" value="choose file" title="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+        <input type="submit" value="upload">
+    </form>
 {% endblock %}
