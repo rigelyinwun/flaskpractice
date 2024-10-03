@@ -3,13 +3,13 @@
 
 {% block content %}
     <h1>hello world</h1>
-    <!-- <ul>
+    <ul>
         {% for item in mylist %}
             <li {% if item ==30 %}style="color:red"{% endif %}>{{ item }}</li>
         {% endfor %}
     </ul>
     <p>{{ mylist }}</p>
-    <a href="{{ url_for('other') }}">other</a> -->
+    <a href="{{ url_for('other') }}">other</a>
     <form action="{{ url_for('index') }}" method="POST">
         <input type="text" name="username" title="username" placeholder="username"><br>
         <input type="password" name="password" title="password" placeholder="password"><br>
@@ -30,4 +30,26 @@
         <input type="file" value="choose file" title="file" name="file" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
         <input type="submit" value="upload">
     </form>
+    <h1>javascript json request</h1>
+    <button id="post_button">send post request</button>
+    <img src="/logo.png" alt="">
+    <a href="#" class="btn btn-primary">button text</a>
+    <script type="text/javascript">
+        const postButton=document.getElementById('post_button')
+        const jsonData={name:'mike',greeting:'hello'}
+        postButton.addEventListener('click',()=>{
+            fetch('{{ url_for("handle_post") }}',{
+                method:'POST',
+                headers:{
+                    'Content-Type':'application/json; charset=utf-8'
+                },
+                body:JSON.stringify(jsonData)
+            })
+                .then(response=>response.json())
+                .then(data=>console.log('success: ',data))
+                .catch((error)=>{
+                    console.error('error:',error)
+                })
+        })
+    </script>
 {% endblock %}

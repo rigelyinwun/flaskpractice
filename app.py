@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, make_response, redirect, url_for,send_from_directory,Response
+from flask import Flask, render_template, request, make_response, redirect, url_for,send_from_directory,Response,jsonify
 import pandas as pd
 import os
 import uuid
 
-app = Flask(__name__, template_folder='templates')
+app = Flask(__name__, template_folder='templates',static_folder='static',static_url_path='/')
 
 @app.route('/',methods=['GET','POST'])
 def index():
@@ -52,6 +52,14 @@ def convert_csv_two():
 @app.route('/download/<filename>')
 def download(filename):
     return send_from_directory('downloads',filename,download_name='result.csv')
+
+@app.route('/handle_post',methods=['POST'])
+def handle_post():
+    greeting= request.json['greeting']
+    name=request.json['name']
+    with open('file.txt','w') as f:
+        f.write(f'{greeting}, {name}')
+    return jsonify({'message':'successful'})
 
 @app.route('/other')
 def other():

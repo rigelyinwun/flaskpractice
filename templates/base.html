@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Default Value{% endblock %}</title>
+    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
+
 <body>
     {% block content %}
     <h1>hello world</h1>
     <ul>
         {% for item in mylist %}
-            <li {% if item ==30 %}style="color:red"{% endif %}>{{ item }}</li>
+        <li {% if item==30 %}style="color:red" {% endif %}>{{ item }}</li>
         {% endfor %}
     </ul>
     <p>{{ mylist }}</p>
     {% endblock %}
+    <script src="/js/bootstrap.js"></script>
 </body>
+
 </html>
