@@ -1,9 +1,10 @@
-from flask import Flask, render_template, request, make_response, redirect, url_for,send_from_directory,Response,jsonify
+from flask import Flask, render_template, request, make_response, redirect, url_for,send_from_directory,Response,jsonify,session,flash
 import pandas as pd
 import os
 import uuid
 
 app = Flask(__name__, template_folder='templates',static_folder='static',static_url_path='/')
+app.secret_key = 'ali1234'
 
 @app.route('/',methods=['GET','POST'])
 def index():
@@ -17,6 +18,57 @@ def index():
         else:
             return 'fail'
         
+@app.route('/set_data')
+def set_data():
+    session['name']='mike'
+    session['other']='hello world'
+    return render_template('index.html',message='session data set')
+
+@app.route('/get_data')
+def get_data():
+    if 'name' in session.keys() and 'other' in session.keys():
+        name=session['name']
+        other=session['other']
+        return render_template('index.html',message=f'name:{name},other:{other}')
+    else:
+        return render_template('index.html',message='no session found')
+    
+@app.route('/clear')
+def clear():
+    session.clear()
+    return render_template('index.html',message='session clear')
+
+@app.route('/set_cookie')
+def set_cookie():
+    response=make_response(render_template('index.html',message='cookie set'))
+    response.set_cookie('cookie_name','cookie_value')
+    return response
+
+@app.route('/get_cookie')
+def get_cookie():
+    cookie_value=request.cookies['cookie_name']
+    return render_template('index.html',message=f'cookie value:{cookie_value}')
+        
+@app.route('/remove_cookie')
+def remove_cookie():
+    response=make_response(render_template('index.html',message='cookie removed'))
+    response.set_cookie('cookie_name',expires=0)
+    return response
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+    if request.method=='GET':
+        return render_template('login.html')
+    elif request.method=='POST':
+        username=request.form.get('username')
+        password=request.form.get('password')
+        if username=='nnn' and password=='pass1234':
+            flash('successful login')
+            return render_template('index.html',message='')
+        else:
+            flash('login failed')
+            return render_template('index.html',message='')
+
 @app.route('/file_upload',methods=['POST'])
 def file_upload():
     file=request.files['file']

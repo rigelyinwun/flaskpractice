@@ -34,6 +34,14 @@
     <button id="post_button">send post request</button>
     <img src="/logo.png" alt="">
     <a href="#" class="btn btn-primary">button text</a>
+    <p>{{ message }}</p>
+    <a href="{{ url_for('set_data') }}">set session data</a>
+    <a href="{{ url_for('get_data') }}">get session data</a>
+    <a href="{{ url_for('clear') }}">clear session data</a><br>
+    <a href="{{ url_for('set_cookie') }}">set cookie</a>
+    <a href="{{ url_for('get_cookie') }}">get cookie</a>
+    <a href="{{ url_for('remove_cookie') }}">remove cookie</a>
+    <a href="{{ url_for('login') }}">login</a>
     <script type="text/javascript">
         const postButton=document.getElementById('post_button')
         const jsonData={name:'mike',greeting:'hello'}
