@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1>index page</h1>
-    <ul>
+    <!-- <ul>
         {% for person in people %}
             <li>{{ person }} <button onclick="deletePerson('{{ person.pid }}')">delete</button><a href="{{ url_for('details',pid=person.pid) }}">details</a></li>
         {% endfor %}
@@ -14,9 +14,22 @@
         <input type="number" name="age" title="age" placeholder="age" required><br>
         <input type="text" name="job" title="job" placeholder="job" required><br>
         <input type="submit" value="create">
-    </form>
-    <script>
-        function deletePerson(pid){
+    </form> -->
+
+    {% if current_user.is_authenticated %}
+        <h3>Hello {{ current_user.username }}</h3>
+    {% else %}
+        <h3>hello</h3>
+    {% endif %}
+
+    <a href="{{ url_for('login') }}">login</a>
+    <a href="{{ url_for('signup') }}">signup</a>
+    <a href="{{ url_for('logout') }}">logout</a>
+    <a href="{{ url_for('secret') }}">secret</a>
+
+{% endblock %}
+<!-- <script>
+        /*function deletePerson(pid){
             fetch('{{ url_for("delete", pid=pid) }}'+pid,{
                 method:'DELETE'
             }).then(response=>{
@@ -30,5 +43,4 @@
                     console.error('error during fetching: ',error)
                 })
         }
-    </script>
-{% endblock %}
+    </script> -->
