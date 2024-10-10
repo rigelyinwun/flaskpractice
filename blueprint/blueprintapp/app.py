@@ -1,11 +1,9 @@
 from flask import Flask,redirect,url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
-import psycopg2
-from flask_login import LoginManager
-from flask_bcrypt import Bcrypt
+# import psycopg2
 
-conn = psycopg2.connect("dbname=flasktutorialdb user=postgres password=ali1234 host=localhost")
+# conn = psycopg2.connect("dbname=flasktutorialdb user=postgres password=ali1234 host=localhost")
 
 
 db=SQLAlchemy()
